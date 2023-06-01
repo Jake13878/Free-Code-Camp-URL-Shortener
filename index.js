@@ -32,10 +32,12 @@ app.post('/api/shorturl', (req, res) => {
     return;
   }
   dns.lookup(url.replace(/^(http|https):\/\//, ''), (err, address) => {
-    if (err) {
+    if (!address) {
       res.json({error: 'invalid url'});
       return;
     }
+    console.log(address);
+    console.log(err);
     const shortUrl = Math.floor(Math.random() * 100000).toString();
     urlMap[shortUrl] = url;
     res.json({original_url: url, short_url: shortUrl});
