@@ -34,6 +34,8 @@ app.post('/api/shorturl', (req, res) => {
   dns.lookup(url.replace(/^(http|https):\/\//, ''), (err, address) => {
     if (!address) {
       res.json({error: 'invalid url'});
+      console.log(err);
+      console.log(url);
       return;
     }
     console.log(address);
